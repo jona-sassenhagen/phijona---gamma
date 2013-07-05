@@ -29,8 +29,7 @@ end;
 % across experiments, frequencies, electrodes, time window lengths, time steps,
 % and save coordinates of max val
 
-timewindows = {[0:25:1000], [0:100:1000], [0:250:1000]};
-winlength = {25,100,250};
+winlength = [round(25/8),round(100/8),round(250/8)];
 
 for X = 1:10
 
@@ -46,19 +45,22 @@ for X = 1:10
 		end;
 	end;
 
-	[ntimes,nfreqs,nchans,nsubjs]=size(allersp);
+	[nfreqs,ntimes,nchans,nsubjs]=size(allersp);
 
 	coord=[];t=[];
 	for frequencies = 45:90
 		for e = 1:length(all_available_chans)
 			elec = electrode(e);									% choose elec (1/(length(C)))
-			for winsize = 1:length(timewindows)						% choose timewins (1/4)
-				for timewindow = 1:length(timewindows(winsize))-1	% choose position in timewindow (depends on winsize)
+			for winsize = 1:length(winlength)						% choose timewins (1/4)
+				startingpositions = [0:winlength(winsize):round(1000/8)];
+ 				for timewindow = 1:length(startingpositions)-1;
+					windowstart = startingpositions(timewindow);
+																	% choose beginning of timewindow (depends on winsize)
 					for subject = 1:nsubjs							% choose subj (depends on exp)
 					
-						tframe = [timewindow:(timewindow+winlength(winsize))]
-					
-						value(subject) = mean((allersp(frequencies,tframe,elec,subject)),2);
+						t1 = windowstart+61;
+						t2 = t1+(winlength(winsize));					
+						value(subject)=mean(allersp(frequencies,t1:t2,elec,subject));
 					end;
 					[h,p,ci,stats] = ttest(value);
 					t = [t,stats.tstat];
@@ -70,7 +72,7 @@ for X = 1:10
 	end;
 	
 	[tvalue,max_tval_index] = max(abs(t));
-	max_t_coord{X} = coord(max_tval_index);
+	max_t_coord{X} = coord(max_tval_index,:,:);
 
 	
 
