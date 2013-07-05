@@ -23,13 +23,11 @@ for X = 1:10
 
 end;
 
-
 clear max_t_coord
 % run massive list of ttests  
 % across experiments, frequencies, electrodes, time window lengths, time steps,
 % and save coordinates of max val
 
-% doesn't work yet b/c "allersp" actually has an individual name for each subj
 
 winlength = [round(25/8),round(100/8),round(250/8)];			% /8 because of 125 hz sampling rate
 
@@ -38,6 +36,9 @@ for X = 1:10
 	sourcefile = ['/home/jona/gamma/',num2str((X),'%01i'),'c.mat'];
 
 	load(sourcefile)
+
+	S = whos('-file',sourcefile);
+	allersp = eval(S(1).name);
 
 	for Y = 1:length(chanlocs)
 		for Z = 1:length(all_available_chans)
@@ -66,7 +67,7 @@ for X = 1:10
 					end;
 					[h,p,ci,stats] = ttest(value);
 					t = [t,stats.tstat];
-					coord = [coord;{frequencies,timewindow,elec}];
+					coord = [coord;{frequencies,timewindow,chanlocs(elec).labels}];
 					clear value;
 				end;
 			end;
@@ -75,11 +76,12 @@ for X = 1:10
 	
 	[tvalue,max_tval_index] = max(abs(t))							% find max val
 	max_t_coord{X} = [coord(max_tval_index,:,:)];					% save frequency/time/electrode coordinates for max val
-																	% there is one problem still .. elec is saved as a rather meaningless/experiment-specific number. it should probably be saved in reference to all_available_chans
 
 
 end;
 
+
+% tested up to this point
 
 % jackknife
 % calculate max val ttests again on each subject
