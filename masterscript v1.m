@@ -38,7 +38,12 @@ for X = 1:10
 	load(sourcefile)
 
 	S = whos('-file',sourcefile);
-	allersp = eval(S(1).name);
+
+	for P = 1:4
+	content_sizes(P) = S(P).bytes;
+	end;
+	[R,F] = max(content_sizes);
+	allersp = eval(S(F).name);
 
 	for Y = 1:length(chanlocs)
 		for Z = 1:length(all_available_chans)
@@ -67,7 +72,7 @@ for X = 1:10
 					end;
 					[h,p,ci,stats] = ttest(value);
 					t = [t,stats.tstat];
-					coord = [coord;{frequencies,timewindow,chanlocs(elec).labels}];
+					coord = [coord;{frequencies,t1,t2,chanlocs(elec).labels}];
 					clear value;
 				end;
 			end;
@@ -75,7 +80,7 @@ for X = 1:10
 	end;
 	
 	[tvalue,max_tval_index] = max(abs(t))							% find max val
-	max_t_coord{X} = [coord(max_tval_index,:,:)];					% save frequency/time/electrode coordinates for max val
+	max_t_coord{X} = [coord(max_tval_index,:,:,:)];					% save frequency/time/electrode coordinates for max val
 
 
 end;
