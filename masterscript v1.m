@@ -21,12 +21,12 @@ for X = 1:10
 
 	S = whos('-file',sourcefile);
 
-	for P = 1:4
+	for P = 1:4													% this one finds the name of allersp
 	content_sizes(P) = S(P).bytes;
 	end;
 	[R,F] = max(content_sizes);
 	allersp = eval(S(F).name);
-	clear S(F).name;
+	clear S(F).name;											% ... just to clear it again
 	
 	clear labels;
 
@@ -38,7 +38,7 @@ clear max_t_coord
 % and save coordinates of max val
 
 
-winlength = [round(25/8),round(100/8),round(250/8)];			% /8 because of 125 hz sampling rate
+winlength = [round(25/8),round(100/8),round(250/8)];				% /8 because of 125 hz sampling rate
 
 for X = 1:10
 
@@ -48,15 +48,15 @@ for X = 1:10
 
 	S = whos('-file',sourcefile);
 
-	for P = 1:4
+	for P = 1:4														% find the ERSP data (which have varying names)
 	content_sizes(P) = S(P).bytes;
 	end;
 	[R,F] = max(content_sizes);
 	allersp = eval(S(F).name);
 	clear S(F).name;
 	
-	for Y = 1:length(chanlocs)
-		for Z = 1:length(all_available_chans)
+	for Y = 1:length(chanlocs)										% this is supposed to get the numbers of the appropriate electrodes, which differ between files
+		for Z = 1:length(all_available_chans)						% note that it requires all_available_chans to still be available
 			if strcmp(upper(chanlocs(Y).labels),all_available_chans(Z)) == 1;
 			electrode(Z) = Y;
 			end;
@@ -96,7 +96,6 @@ for X = 1:10
 end;
 
 
-% tested up to this point
 
 % jackknife
 % calculate max val ttests again on each subject
@@ -108,12 +107,33 @@ sourcefile = ['/home/jona/gamma/',num2str((X),'%01i'),'c.mat'];
 
 	load(sourcefile)
 
-	for Y = 1:10
+	for Y = 1:length(chanlocs)									% this is supposed to get the numbers of the appropriate electrodes, which differ between files
+		for Z = 1:length(all_available_chans)					% note that it requires all_available_chans to still be available
+			if strcmp(upper(chanlocs(Y).labels),all_available_chans(Z)) == 1;
+			electrode(Z) = Y;
+			end;
+		end;
+	end;
 
-		[h,p,ci,stats] = ttest(mean((allersp(max_t_coord{Y})),2));
+
+	S = whos('-file',sourcefile);
+
+	for P = 1:4													% this again finds allersp
+	content_sizes(P) = S(P).bytes;
+	end;
+	[R,F] = max(content_sizes);
+	allersp = eval(S(F).name);
+
+	for Y = 1:10												% this loop tests all the coordinates from max_t_coord
+																% note that each file is also tested against its own max t vals!
+		a = max_t_coord{Y};
+		frequency = a{1}; t1 = a{2}; t2 = a{3}; elec = {4};
+		[h,p,ci,stats] = ttest(mean( allersp( frequency, t1:t2, electrode(e), :  ),2));
 
 		outcomes(X,Y) = h;
 		
 	end;
 
 end;
+
+sum(sum(outcomes))
