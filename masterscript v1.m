@@ -19,6 +19,15 @@ for X = 1:10
 		all_available_chans = intersect(upper(labels),upper(all_available_chans))
 	end;
 
+	S = whos('-file',sourcefile);
+
+	for P = 1:4
+	content_sizes(P) = S(P).bytes;
+	end;
+	[R,F] = max(content_sizes);
+	allersp = eval(S(F).name);
+	clear S(F).name;
+	
 	clear labels;
 
 end;
@@ -44,7 +53,8 @@ for X = 1:10
 	end;
 	[R,F] = max(content_sizes);
 	allersp = eval(S(F).name);
-
+	clear S(F).name;
+	
 	for Y = 1:length(chanlocs)
 		for Z = 1:length(all_available_chans)
 			if strcmp(upper(chanlocs(Y).labels),all_available_chans(Z)) == 1;
