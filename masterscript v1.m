@@ -100,6 +100,7 @@ end;
 % jackknife
 % calculate max val ttests again on each subject
 
+clear outcomes
 for X = 1:10
 
 
@@ -107,19 +108,11 @@ sourcefile = ['/home/jona/gamma/',num2str((X),'%01i'),'c.mat'];
 
 	load(sourcefile)
 
-	for Y = 1:length(chanlocs)									% this is supposed to get the numbers of the appropriate electrodes, which differ between files
-		for Z = 1:length(all_available_chans)					% note that it requires all_available_chans to still be available
-			if strcmp(upper(chanlocs(Y).labels),all_available_chans(Z)) == 1;
-			electrode(Z) = Y;
-			end;
-		end;
-	end;
-
 
 	S = whos('-file',sourcefile);
 
 	for P = 1:4													% this again finds allersp
-	content_sizes(P) = S(P).bytes;
+		content_sizes(P) = S(P).bytes;
 	end;
 	[R,F] = max(content_sizes);
 	allersp = eval(S(F).name);
@@ -127,9 +120,24 @@ sourcefile = ['/home/jona/gamma/',num2str((X),'%01i'),'c.mat'];
 	for Y = 1:10												% this loop tests all the coordinates from max_t_coord
 																% note that each file is also tested against its own max t vals!
 		a = max_t_coord{Y};
-		frequency = a{1}; t1 = a{2}; t2 = a{3}; elec = {4};
-		[h,p,ci,stats] = ttest(mean( allersp( frequency, t1:t2, electrode(e), :  ),2));
+		frequency = a{1}; t1 = a{2}; t2 = a{3}; elec = a{4};
+		
+		for Y = 1:length(chanlocs)									% this is supposed to get the numbers of the appropriate electrodes, which differ between files
+			if strcmp(upper(chanlocs(Y).labels),elec) == 1;
+				el = Y;
+			end;
+		end;
+		
+		[h,p,ci,stats] = ttest(mean( allersp( frequency, t1:t2, el, :  ),2));
 
+		if h == 1
+			sourcefile
+			frequency
+			t1
+			t2
+			chanlocs(el).labels
+		end;
+		
 		outcomes(X,Y) = h;
 		
 	end;
