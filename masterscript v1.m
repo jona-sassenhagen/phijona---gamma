@@ -32,12 +32,11 @@ for X = 1:10
 
 end;
 
-clear max_t_coord
 % run massive list of ttests  
 % across experiments, frequencies, electrodes, time window lengths, time steps,
 % and save coordinates of max val
-
-
+clear max_t_coord
+hs = [];
 winlength = [round(25/8),round(100/8),round(250/8)];				% /8 because of 125 hz sampling rate
 
 for X = 1:10
@@ -66,7 +65,7 @@ for X = 1:10
 	[nfreqs,ntimes,nchans,nsubjs]=size(allersp);
 
 	coord=[];t=[];
-	for frequencies = 45:90											% freqs(frequencies) will tell you what frequency it is
+	for frequencies = 45:90-8											% freqs(frequencies) will tell you what frequency it is
 		for e = 1:length(all_available_chans)						% chanlocs(elec).label will tell you what electrode it is
 			elec = electrode(e);									% choose elec (1/(length(C)))
 			for winsize = 1:length(winlength)						% choose timewins (1/4)
@@ -78,10 +77,11 @@ for X = 1:10
 					
 						t1 = windowstart+61;						% 61 is time point 0 b/c the -760:1760 time window data is sampled at 125 hz
 						t2 = t1+(winlength(winsize));					
-						value(subject)=mean(allersp(frequencies,t1:t2,elec,subject));
+						value(subject)=mean(mean(allersp(frequencies:frequencies+8,t1:t2,elec,subject)));
 					end;
 					[h,p,ci,stats] = ttest(value);
 					t = [t,stats.tstat];
+					hs = [hs,h];
 					coord = [coord;{frequencies,t1,t2,chanlocs(elec).labels}];
 					clear value;
 				end;
@@ -91,7 +91,7 @@ for X = 1:10
 	
 	[tvalue,max_tval_index] = max(abs(t))							% find max val
 	max_t_coord{X} = [coord(max_tval_index,:,:,:)];					% save frequency/time/electrode coordinates for max val
-
+	allhs(X) = hs(max_tval_index);
 
 end;
 
@@ -122,7 +122,7 @@ sourcefile = ['/home/jona/gamma/',num2str((X),'%01i'),'c.mat'];
 		a = max_t_coord{Y};
 		frequency = a{1}; t1 = a{2}; t2 = a{3}; elec = a{4};
 		
-		for Y = 1:length(chanlocs)									% this is supposed to get the numbers of the appropriate electrodes, which differ between files
+		for Y = 1:length(chanlocs)								% this is supposed to get the numbers of the appropriate electrodes, which differ between files
 			if strcmp(upper(chanlocs(Y).labels),elec) == 1;
 				el = Y;
 			end;
@@ -130,12 +130,16 @@ sourcefile = ['/home/jona/gamma/',num2str((X),'%01i'),'c.mat'];
 		
 		[h,p,ci,stats] = ttest(mean( allersp( frequency, t1:t2, el, :  ),2));
 
-		if h == 1
-			sourcefile
-			frequency
-			t1
-			t2
-			chanlocs(el).labels
+%		if h == 1												% this should provide the coordinates of all positive tests
+%			sourcefile
+%			frequency
+%			t1
+%			t2
+%			chanlocs(el).labels
+%		end;
+		
+		if X == Y
+			h
 		end;
 		
 		outcomes(X,Y) = h;
