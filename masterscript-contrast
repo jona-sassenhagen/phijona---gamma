@@ -42,18 +42,38 @@ winlength = [round(25/8),round(100/8),round(250/8)];				% /8 because of 125 hz s
 
 for X = 1:10
 
+	clear allersp1; clear allersp2;clear allersp;
+
 	sourcefile = ['/home/jona/gamma/',num2str((X),'%01i'),'c.mat'];
+	sourcefiles = ['/home/jona/gamma/',num2str(X),'s.mat'];
 
 	load(sourcefile)
 
 	S = whos('-file',sourcefile);
 
-	for P = 1:4														% find the ERSP data (which have varying names)
-	content_sizes(P) = S(P).bytes;
+	for P = 1:4								
+		content_sizes(P) = S(P).bytes;
 	end;
 	[R,F] = max(content_sizes);
-	allersp = eval(S(F).name);
+	allersp1 = eval(S(F).name);
 	clear S(F).name;
+
+	sourcefiles = ['/home/jona/gamma/',num2str(X),'s.mat'];
+
+	load(sourcefiles)
+
+	S = whos('-file',sourcefiles);
+
+	for P = 1:4								
+		content_sizes(P) = S(P).bytes;
+	end;
+	[R,F] = max(content_sizes);
+	allersp2 = eval(S(F).name);
+	clear S(F).name;
+
+	allersp = allersp1-allersp2;
+	clear allersp1; clear allersp2;
+
 	
 	for Y = 1:length(chanlocs)										% this is supposed to get the numbers of the appropriate electrodes, which differ between files
 		for Z = 1:length(all_available_chans)						% note that it requires all_available_chans to still be available
@@ -66,6 +86,7 @@ for X = 1:10
 	[nfreqs,ntimes,nchans,nsubjs]=size(allersp);
 
 	coord=[];t=[];
+
 	for frequencies = 50:90-8											% freqs(frequencies) will tell you what frequency it is
 		for e = 1:length(all_available_chans)						% chanlocs(elec).label will tell you what electrode it is
 			elec = electrode(e);									% choose elec (1/(length(C)))
@@ -92,6 +113,7 @@ for X = 1:10
 	end;
 	
 	[tvalue,max_tval_index] = max(abs(t))							% find max val
+
 	max_t_coord{X} = [coord(max_tval_index,:,:,:)];					% save frequency/time/electrode coordinates for max val
 	allhs(X) = hs(max_tval_index);
 	clear allersp;
@@ -105,18 +127,37 @@ end;
 outcomes = [];
 for X = 1:10
 
+	clear allersp1; clear allersp2;clear allersp;
+
 	sourcefile = ['/home/jona/gamma/',num2str((X),'%01i'),'c.mat'];
+	sourcefiles = ['/home/jona/gamma/',num2str(X),'s.mat'];
 
 	load(sourcefile)
 
-
 	S = whos('-file',sourcefile);
 
-	for P = 1:4													% this again finds allersp
+	for P = 1:4								
 		content_sizes(P) = S(P).bytes;
 	end;
 	[R,F] = max(content_sizes);
-	allersp = eval(S(F).name);
+	allersp1 = eval(S(F).name);
+	clear S(F).name;
+
+	sourcefiles = ['/home/jona/gamma/',num2str(X),'s.mat'];
+
+	load(sourcefiles)
+
+	S = whos('-file',sourcefiles);
+
+	for P = 1:4								
+		content_sizes(P) = S(P).bytes;
+	end;
+	[R,F] = max(content_sizes);
+	allersp2 = eval(S(F).name);
+	clear S(F).name;
+
+	allersp = allersp1-allersp2;
+	clear allersp1; clear allersp2;
 
 	for Y = 1:10												% this loop tests all the coordinates from max_t_coord
 																% note that each file is also tested against its own max t vals!
@@ -164,4 +205,3 @@ U
 sum(sum(outcomes))
 
 
-% figure; tftopo(allersp,times,freqs,'mode','ave','limits', [nan nan nan nan nan nan], 'timefreqs', [times(166) 30], 'chanlocs', chanlocs,'smooth',2,'style','map','electrodes','off');
