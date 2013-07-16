@@ -1,14 +1,14 @@
 Coordinates of gamma-band activity
 
-------				------	----------	------		--------------
-Study				Space	Frequency	Time		Condition
-Hagoort et al 2004	Fz		35-45		300-800		World Knowledge Violation, but not Control (50% cloze) or Semantic Violation
-Hald et al 2006		F4?		35-45		0-600		Control (50% cloze), but not Semantic Violation
-Penolazzi etal 2009	?		30-100		0-512?		Control > Semantic Violation
-Urrutia et al 2012	F3		80-90		300-800		Factual, but not counterfactual
-Rommers et al 2013	CPz?	55-70		200-1000	Control, but not (unrelated) Semantic Violations
-Wang et al 2012		Pz		40-50		0-1200		Control (68% cloze), but not Control (? < 68%) or Semantic Violation
-------				------	----------	------		--------------
+Study                       Space	  Frequency	  Time		    Condition
+---------------------  			------	----------	---------	-------------------------------------------------------------------------------
+Hagoort et al 2004	          Fz		35-45	    	300-800		World Knowledge Violation, but not Control (50% cloze) or Semantic Violation
+Hald et al 2006		            F4?		35-45		    0-600		  Control (50% cloze), but not Semantic Violation
+Penolazzi etal 2009	          ? 		30-100		  0-512?		Control > Semantic Violation
+Urrutia et al 2012	          F3		80-90		    300-800		Factual, but not counterfactual
+Rommers et al 2013	          CPz?	55-70   		200-1000	Control, but not (unrelated) Semantic Violations
+Wang et al 2012		            Pz		40-50		    0-1200		Control (68% cloze), but not Control (? < 68%) or Semantic Violation
+
 
 
 Hagoort et al. 2004 and Hald et al. 2006 may be the same experiment, with the exclusion of a condition by Hald et al. 2006. Bastiaansen et al. 2012 write that the stimuli in this experiment, not differentiating between Hagoort et al 2004 and Hald et al 2006, lead to an increase in the gamma band for Control, but not Semantic Violation. However, Hagoort et al. 2004 explicitly state that no difference was observed in Control.
@@ -26,6 +26,9 @@ Possible methodological differences
 
 Possible differences in material
 - our sentences span the whole range of observed gamma band differences, including multiple experiments including high- and low-cloze contexts and violations in high- and low-cloze contexts. Every experiment features at least a congruent control and an incongruent comparison
+<<<<<<< HEAD:übersicht.txt
 
 
 Cluster Correction may be inappropriate for cortical gamma-band activity in general since gamma is known to be synchronized only very focally {vonStein:2000wf}{DuunHenriksen:2013gn}, and Cluster Correction is highly sensitive to distributed effects, while being insensitive to focal effects (Groppe et al., 2011)
+=======
+>>>>>>> 9b8cefe3234a6bd6213b1190ae8ea17c11613f1a:übersicht.rst
