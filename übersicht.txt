@@ -26,3 +26,6 @@ Possible methodological differences
 
 Possible differences in material
 - our sentences span the whole range of observed gamma band differences, including multiple experiments including high- and low-cloze contexts and violations in high- and low-cloze contexts. Every experiment features at least a congruent control and an incongruent comparison
+
+
+Cluster Correction may be inappropriate for cortical gamma-band activity in general since gamma is known to be synchronized only very focally {vonStein:2000wf}{DuunHenriksen:2013gn}, and Cluster Correction is highly sensitive to distributed effects, while being insensitive to focal effects (Groppe et al., 2011)
