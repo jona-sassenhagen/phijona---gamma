@@ -1,6 +1,5 @@
 Coordinates of gamma-band activity
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Study                       Space	  Frequency	  Time		    Condition
 ---------------------  			------	----------	---------	-------------------------------------------------------------------------------
 Hagoort et al 2004	          Fz		35-45	    	300-800		World Knowledge Violation, but not Control (50% cloze) or Semantic Violation
@@ -8,8 +7,8 @@ Hald et al 2006		            F4?		35-45		    0-600		  Control (50% cloze), but n
 Penolazzi etal 2009	          ? 		30-100		  0-512?		Control > Semantic Violation
 Urrutia et al 2012	          F3		80-90		    300-800		Factual, but not counterfactual
 Rommers et al 2013	          CPz?	55-70   		200-1000	Control, but not (unrelated) Semantic Violations
-Wang et al 2012		             Pz		40-50		    0-1200		Control (68% cloze), but not Control (? < 68%) or Semantic Violation
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Wang et al 2012		            Pz		40-50		    0-1200		Control (68% cloze), but not Control (? < 68%) or Semantic Violation
+
 
 
 Hagoort et al. 2004 and Hald et al. 2006 may be the same experiment, with the exclusion of a condition by Hald et al. 2006. Bastiaansen et al. 2012 write that the stimuli in this experiment, not differentiating between Hagoort et al 2004 and Hald et al 2006, lead to an increase in the gamma band for Control, but not Semantic Violation. However, Hagoort et al. 2004 explicitly state that no difference was observed in Control.
