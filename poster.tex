@@ -6,7 +6,7 @@
 %\usepackage[orientation=landscape,height=1067mm,width=1524mm,scale=1.4,debug]{beamerposter}
 
 \usepackage[absolute,overlay]{textpos}
-\usepackage[numbers]{natbib}
+\usepackage[numbers,compress]{natbib}
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{array}
@@ -21,7 +21,8 @@
 \title{Reliability of gamma activity during semantic integration}
 \author{Jona Sassenhagen \and Phillip Alday}
 \institute{University of Marburg}
-\footer{Live code at \url{https://github.com/jona-sassenhagen/phijona---gamma}}
+\footer{}
+%\footer{Live code at \url{https://github.com/jona-sassenhagen/phijona---gamma}}
 \date{}
 
 \begin{document}
@@ -35,11 +36,23 @@
 
 \begin{textblock}{45}(1,04.5)
 \begin{block}{Motivation: Reproducibility of Results}
-
+Recently, research on event-related spectral perturbations (ERSPs) has begun to focus on the gamma band of the human EEG. A number of recent studies have reported gamma effects for semantic integration (related to cloze probability in classical N400 paradigms) \cite{mellemfriedmanmedvedev2013a,wangbastiaansenyang2012a,penolazziangrillijob2009a,hagoort2008a,hagoorthaldbastiaansen2004a}, but the effects thus far have been far less consistent than previous findings in the lower frequency bands (cf.~\cite{heinetammhofmann2006a,davidsonindefrey2007a,roehmschlesewskybornkessel2004a}).
+% Roehm et al., 2001, Bastiaansen et al 2005
+In line with recent concerns about the reliability of effects in the brain sciences \cite{simmonsnelsonsimonsohn2011a,vulpashler2012a}, we performed a pseudo-jackknife replication meta-analysis of existing experimental data. 
+% killner 2013
 %\subblock{Title}
 \end{block}
 
 \begin{block}{Prior Research}
+\begin{tabular}{p{10cm} l c c c }
+Study & $\gamma$-Cond. & Time  & Space & Freq. \\
+\midrule
+\cite{mellemfriedmanmedvedev2013a} & & & &\\
+\cite{wangbastiaansenyang2012a} & & & & \\
+\cite{penolazziangrillijob2009a} & & & &\\ 
+\cite{hagoort2008a} & & & & \\
+\cite{hagoorthaldbastiaansen2004a} & & & & \\
+\end{tabular}
 \end{block}
 
 \begin{block}{Method (Pseudo-Jackknife)}
@@ -87,33 +100,32 @@
     \path [line] (forloop-outer) |-  (foreach-outer);
 	\path [line] (endfor-outer) -> node {no} (finish);
 	
-    %\path [line] (endfor-inner) |- (forloop-inner) -| (foreach-inner);
-    %\path [line] (endfor-outer) -| (forloop-outer) |- (foreach-outer);
-
-    %\path [line] (identify) -- (evaluate);
-    %\path [line] (evaluate) -- (decide);
-    %\path [line] (decide) -| node [near start] {yes} (update);
-    %\path [line] (update) |- (identify);
-    %\path [line] (decide) -- node {no}(stop);
-    %\path [line,dashed] (expert) -- (init);
-    %\path [line,dashed] (system) -- (init);
-    %\path [line,dashed] (system) |- (evaluate);
 \end{tikzpicture}
 \end{block}
+\end{textblock}
 
+\begin{textblock}{25}(20,35.5)
+\begin{block}{Data}
+\begin{itemize}
+\item 11 Studies
+\item 7 auditory, 4 visual presentation
+\item 3 languages (German, English and Welsh)
+\end{itemize}
+\end{block}
 \end{textblock}
 
 \begin{textblock}{57}(47.5,04.5)
 \begin{block}{Replication}
+\includegraphics[height=73cm]{gamma}
 \end{block}
 \end{textblock}
 
 
-\begin{textblock}{21.5}(90,68.7)
+\begin{textblock}{27.5}(90,58.7)
 \begin{block}{Literature}
 \tiny
-%\bibliographystyle{pma-unsrt}
-%\bibliography{poster.bib}
+\bibliographystyle{pma-unsrt}
+\bibliography{poster.bib}
 \end{block}
 \end{textblock}
 
