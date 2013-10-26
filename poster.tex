@@ -1,8 +1,8 @@
 \documentclass[final]{beamer}
 \usetheme{RJH}
-\usepackage[orientation=landscape,size=a0,scale=1.4,debug]{beamerposter}
+\usepackage[orientation=landscape,size=a0,scale=1.4]{beamerposter}
 \usepackage{tikz}
-\usetikzlibrary{arrows}
+\usetikzlibrary{shapes,arrows,decorations.markings}
 %\usepackage[orientation=landscape,height=1067mm,width=1524mm,scale=1.4,debug]{beamerposter}
 
 \usepackage[absolute,overlay]{textpos}
@@ -21,7 +21,7 @@
 \title{Reliability of gamma activity during semantic integration}
 \author{Jona Sassenhagen \and Phillip Alday}
 \institute{University of Marburg}
-%\footer{Live code at \url{https://github.com/jona-sassenhagen/phijona---gamma}}
+\footer{Live code at \url{https://github.com/jona-sassenhagen/phijona---gamma}}
 \date{}
 
 \begin{document}
@@ -33,18 +33,77 @@
 \end{textblock}
 
 
-\begin{textblock}{29}(1,04.5)
-\begin{block}{Motivation: The Actor Heuristic}
+\begin{textblock}{45}(1,04.5)
+\begin{block}{Motivation: Reproducibility of Results}
 
 %\subblock{Title}
 \end{block}
 
-\begin{block}{Aims}
+\begin{block}{Prior Research}
+\end{block}
+
+\begin{block}{Method (Pseudo-Jackknife)}
+% Define block styles
+% http://www.texample.net/tikz/examples/simple-flow-chart/
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+    text width=4.5em, text badly centered, inner sep=0pt,node distance=10cm]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=5em, text centered, rounded corners, minimum height=4em, node distance = 8cm]
+\tikzstyle{pole} = [rectangle, draw, fill=red!20, 
+    text width=5em, text centered, rounded corners, minimum height=4em, node distance = 8cm]
+\tikzstyle{line} = [draw, ultra thick, postaction={decorate}
+									   ]
+%\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,minimum height=2em]
+    
+\begin{tikzpicture}[auto,decoration={markings,
+								mark=at position 1 with {\arrow[scale=4,black]{latex'}};
+								}]
+    % Place nodes
+    % example shapes: block, cloud, decision
+    \node [pole] (init) {Start};
+    \node [block,below of=init] (preproc) {Wavelet decomposition for all experiments};
+    \node [block, below of=preproc] (foreach-outer) {For each experiment $i$ in set};
+   	\node [block, below of=foreach-outer] (geteffects) {Find largest effect $e_i$ (time,space, frequency)};
+	\node [block, right of=geteffects] (foreach-inner) {For each experiment $j$ in set};
+	\node [block, right of=foreach-inner] (crosstest) {Test whether effect $e_i$ is significant in exp. $j$};
+    \node [decision, right of=crosstest] (endfor-inner) {More exp. to crosstest?};
+    \node [block, above of=crosstest] (forloop-inner) {Next exp. $j$};
+    \node [decision, below of=geteffects] (endfor-outer) {More exp. to explore?};
+    \node [block, left of=geteffects] (forloop-outer) {Next exp. $i$};
+    \node [pole, below of=endfor-outer] (finish) {Stop}; 
+
+    %\node [block, below of=] () {};
+    % Draw edges
+    \path [line] (init) -- (preproc);
+    \path [line] (preproc) -- (foreach-outer);
+    \path [line] (foreach-outer) -- (geteffects);
+    \path [line] (geteffects) -> (foreach-inner);
+    \path [line] (foreach-inner) -- (crosstest);
+    \path [line] (crosstest) -- (endfor-inner);
+    \path [line] (endfor-inner) |- node [near start] {yes} (forloop-inner);
+    \path [line] (forloop-inner) -| (foreach-inner);
+    \path [line] (endfor-inner) |- node {no} (endfor-outer);
+    \path [line] (endfor-outer) -| node {yes} (forloop-outer);
+    \path [line] (forloop-outer) |-  (foreach-outer);
+	\path [line] (endfor-outer) -> node {no} (finish);
+	
+    %\path [line] (endfor-inner) |- (forloop-inner) -| (foreach-inner);
+    %\path [line] (endfor-outer) -| (forloop-outer) |- (foreach-outer);
+
+    %\path [line] (identify) -- (evaluate);
+    %\path [line] (evaluate) -- (decide);
+    %\path [line] (decide) -| node [near start] {yes} (update);
+    %\path [line] (update) |- (identify);
+    %\path [line] (decide) -- node {no}(stop);
+    %\path [line,dashed] (expert) -- (init);
+    %\path [line,dashed] (system) -- (init);
+    %\path [line,dashed] (system) |- (evaluate);
+\end{tikzpicture}
 \end{block}
 
 \end{textblock}
 
-\begin{textblock}{57}(31.5,04.5)
+\begin{textblock}{57}(47.5,04.5)
 \begin{block}{Replication}
 \end{block}
 \end{textblock}
