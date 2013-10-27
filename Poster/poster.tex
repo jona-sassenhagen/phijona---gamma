@@ -10,8 +10,18 @@
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{array}
-\usepackage{wrapfig}
+%\usepackage{wrapfig}
+\usepackage{rotating}
 \graphicspath{{Graphics/}}
+
+% single line bib
+% http://tex.stackexchange.com/a/5574
+%\usepackage{paralist}
+%\renewenvironment{thebibliography}[1]{%
+%  \section*{\refname}%
+%  \let\par\relax\let\newblock\relax%
+%  \inparaenum[{[}1{]}]}{\endinparaenum}
+%\renewcommand{\bibitem}[1]{\item}
 
 \newcolumntype{C}[1]{>{\centering\arraybackslash} m{#1} }
 \setlength{\TPHorizModule}{1cm}
@@ -108,29 +118,43 @@ Study & $\gamma$-Cond. & Time  & Space & Freq. \\
 \begin{itemize}
 \item 11 Studies
 \item 7 auditory, 4 visual presentation
-\item 3 languages (German, English and Welsh)
+\item 3 languages (German, Japanese, Welsh)
 \end{itemize}
 \end{block}
 \end{textblock}
 
-\begin{textblock}{70}(47.5,04.5)
+\begin{textblock}{63}(47.5,04.5)
 \begin{block}{Replication}
 %\includegraphics[height=73cm,width=70cm]{gamma}
 \begin{tabular}{c c c}
 \includegraphics{gamma01} & \includegraphics{gamma02} & \includegraphics{gamma03} \\
+DE / AUD / HIGH / SEM & DE / AUD / MED / COMP & DE / VIS / HIGH / PROBE \& ACC \\
 \includegraphics{gamma04} & \includegraphics{gamma05} & \includegraphics{gamma06} \\
+DE / VIS / MED / PROBE \& ACC  & DE / VIS / MED / PASS & DE / VIS / MED / PASS \\
 \includegraphics{gamma07} & \includegraphics{gamma08} & \includegraphics{gamma09} \\
+JA / VIS / MED / PROBE & DE / AUD / MED / SEM  & DE / AUD / MED / SEM \\
 \includegraphics{gamma10} & \includegraphics{gamma11} &  \\
+DE / AUD /HIGH / SEM & CY / VIS / MED / PROBE \& ACC &  \\
 %German - visual & German auditory & English visual & English auditory \\ 
 \end{tabular}
 \end{block}
+HIGH, MED, LOW = high, medium, low close probability 
+
+SEM = semantic judgment; COMP = comprehension task; PROBE = probe task; \\ ACC = acceptability judgment task; PASS = passive listening 
 \end{textblock}
 
+\begin{textblock}{8}(110.5,04.5)
 
-\begin{textblock}{27.5}(90,58.7)
+\end{textblock}
+
+% like 2012
+%\begin{textblock}{27.5}(90,58.7)
+% long on the bottom
+%\begin{textblock}{95}(20.5,75.7)
+\begin{textblock}{15.5}(102,58.7)
 \begin{block}{Literature}
 \tiny
-\bibliographystyle{pma-unsrt}
+\bibliographystyle{poster}
 \bibliography{poster.bib}
 \end{block}
 \end{textblock}
