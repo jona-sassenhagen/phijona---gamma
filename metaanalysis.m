@@ -31,13 +31,13 @@ for X = 1:10
 	clear labels;
 
 end;
-
-clear max_t_coord
+ 
+U = 1; 
 % run massive list of ttests  
 % across experiments, frequencies, electrodes, time window lengths, time steps,
 % and save coordinates of max val
-
-
+clear max_t_coord
+hs = [];
 winlength = [round(25/8),round(100/8),round(250/8)];				% /8 because of 125 hz sampling rate
 
 for X = 1:10
@@ -66,22 +66,24 @@ for X = 1:10
 	[nfreqs,ntimes,nchans,nsubjs]=size(allersp);
 
 	coord=[];t=[];
-	for frequencies = 45:90											% freqs(frequencies) will tell you what frequency it is
+	for frequencies = 50:90-8											% freqs(frequencies) will tell you what frequency it is
 		for e = 1:length(all_available_chans)						% chanlocs(elec).label will tell you what electrode it is
 			elec = electrode(e);									% choose elec (1/(length(C)))
 			for winsize = 1:length(winlength)						% choose timewins (1/4)
-				startingpositions = [0:winlength(winsize):round(1000/8)];
+				startingpositions = [0:winlength(winsize):80];		% hardcoded 1000 msec window
  				for timewindow = 1:length(startingpositions)-1;		% times(t1:t2) will tell you what time point you're looking at
 					windowstart = startingpositions(timewindow);
 																	% choose beginning of timewindow (depends on winsize)
 					for subject = 1:nsubjs							% choose subj (depends on exp)
 					
-						t1 = windowstart+61;						% 61 is time point 0 b/c the -760:1760 time window data is sampled at 125 hz
+						t1 = windowstart+61;						% hardcoded 61 as time point 0
 						t2 = t1+(winlength(winsize));					
-						value(subject)=mean(allersp(frequencies,t1:t2,elec,subject));
+						value(subject)=mean(mean(allersp(frequencies:frequencies+8,t1:t2,elec,subject)));
+						U = U+1;
 					end;
 					[h,p,ci,stats] = ttest(value);
 					t = [t,stats.tstat];
+					hs = [hs,h];
 					coord = [coord;{frequencies,t1,t2,chanlocs(elec).labels}];
 					clear value;
 				end;
@@ -91,8 +93,8 @@ for X = 1:10
 	
 	[tvalue,max_tval_index] = max(abs(t))							% find max val
 	max_t_coord{X} = [coord(max_tval_index,:,:,:)];					% save frequency/time/electrode coordinates for max val
-
-
+	allhs(X) = hs(max_tval_index);
+	clear allersp;
 end;
 
 
@@ -100,11 +102,10 @@ end;
 % jackknife
 % calculate max val ttests again on each subject
 
-clear outcomes
+outcomes = [];
 for X = 1:10
 
-
-sourcefile = ['/home/jona/gamma/',num2str((X),'%01i'),'c.mat'];
+	sourcefile = ['/home/jona/gamma/',num2str((X),'%01i'),'c.mat'];
 
 	load(sourcefile)
 
@@ -122,26 +123,45 @@ sourcefile = ['/home/jona/gamma/',num2str((X),'%01i'),'c.mat'];
 		a = max_t_coord{Y};
 		frequency = a{1}; t1 = a{2}; t2 = a{3}; elec = a{4};
 		
-		for Y = 1:length(chanlocs)									% this is supposed to get the numbers of the appropriate electrodes, which differ between files
-			if strcmp(upper(chanlocs(Y).labels),elec) == 1;
-				el = Y;
+		for elect = 1:length(chanlocs)								% this is supposed to get the numbers of the appropriate electrodes, which differ between files
+			if strcmp(upper(chanlocs(elect).labels),elec) == 1;
+				el = elect;
 			end;
 		end;
 		
 		[h,p,ci,stats] = ttest(mean( allersp( frequency, t1:t2, el, :  ),2));
 
-		if h == 1
+		if h == 1												% this should provide the coordinates of all positive tests
 			sourcefile
 			frequency
 			t1
 			t2
 			chanlocs(el).labels
 		end;
+
+%		if Y == 10 
+%			if h == 1
+		
+%				sourcefile
+%				frequency
+%				t1
+%				t2
+%				chanlocs(el).labels
+%			end;
+%		end;
+		
+%		if X == Y
+%			h
+%		end;
 		
 		outcomes(X,Y) = h;
 		
 	end;
-
+	clear allersp;
 end;
 
+U
 sum(sum(outcomes))
+
+
+% figure; tftopo(allersp,times,freqs,'mode','ave','limits', [nan nan nan nan nan nan], 'timefreqs', [times(166) 30], 'chanlocs', chanlocs,'smooth',2,'style','map','electrodes','off');
