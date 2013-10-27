@@ -878,10 +878,10 @@ FUNCTION {article}
       "journal" bibinfo.check
       emphasize
       "journal" output.check
-      format.vol.num.pages output
+%      format.vol.num.pages output
     }
     { format.article.crossref output.nonnull
-      format.pages output
+%      format.pages output
     }
   if$
   new.block

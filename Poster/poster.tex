@@ -52,37 +52,31 @@ In line with recent concerns about the reliability of effects in the brain scien
 %\subblock{Title}
 \end{block}
 
-\begin{block}{Literature}
+\begin{block}{Literature \hfill $p$-Values in Prior Research}
+\begin{columns}
+\column{0.05\textwidth}
+\column{0.4\textwidth}
 \tiny
 \bibliographystyle{poster}
 \bibliography{poster.bib}
+\column{0.2\textwidth}
+\column{0.7\textwidth}
+\includegraphics[height=12.5cm]{kspcurve.png}
+\end{columns}
 \end{block}
 
-
-%\begin{block}{Prior Research}
-%\begin{tabular}{p{10cm} l c c c }
-%Study & $\gamma$-Cond. & Time  & Space & Freq. \\
-%\midrule
-%\cite{mellemfriedmanmedvedev2013a} & & & &\\
-%\cite{wangzhubastiaansen2012a} & & & & \\
-%\cite{penolazziangrillijob2009a} & & & &\\ 
-%\cite{hagoort2008a} & & & & \\
-%\cite{hagoorthaldbastiaansen2004a} & & & & \\
-%\end{tabular}
-%\end{block}
-
 \begin{block}{Method (Pseudo-Jackknife)}
+\small
 % Define block styles
 % http://www.texample.net/tikz/examples/simple-flow-chart/
 \tikzstyle{decision} = [diamond, draw, fill=blue!20, 
-    text width=4.5em, text badly centered, inner sep=0pt,node distance=10cm]
+    text width=4.5em, text badly centered, inner sep=0pt,node distance=9.5cm]
 \tikzstyle{block} = [rectangle, draw, fill=blue!20, 
-    text width=5em, text centered, rounded corners, minimum height=4em, node distance = 8cm]
+    text width=5em, text centered, rounded corners, minimum height=4em, node distance = 7.5cm]
 \tikzstyle{pole} = [rectangle, draw, fill=red!20, 
-    text width=5em, text centered, rounded corners, minimum height=4em, node distance = 8cm]
+    text width=5em, text centered, rounded corners, minimum height=4em, node distance = 7.5cm]
 \tikzstyle{line} = [draw, ultra thick, postaction={decorate}
 									   ]
-%\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,minimum height=2em]
     
 \begin{tikzpicture}[auto,decoration={markings,
 								mark=at position 1 with {\arrow[scale=4,black]{latex'}};
@@ -120,13 +114,7 @@ In line with recent concerns about the reliability of effects in the brain scien
 \end{block}
 \end{textblock}
 
-\begin{textblock}{18.2}(30,16.5)
-\begin{block}{$p$-Values in Prior Research}
-\includegraphics{kspcurve.png}
-\end{block}
-\end{textblock}
-
-\begin{textblock}{25}(20,35.5)
+\begin{textblock}{25}(20,38.5)
 \begin{block}{Data}
 \begin{itemize}
 \item 11 Studies
@@ -137,9 +125,10 @@ In line with recent concerns about the reliability of effects in the brain scien
 \end{block}
 \end{textblock}
 
-\begin{textblock}{67}(50.5,04.5)
+\begin{textblock}{67}(48.5,04.5)
 \begin{block}{Replication}
-%\includegraphics[height=73cm,width=70cm]{gamma}
+\centering
+Congruent Condition
 \small
 \begin{tabular}{c c c}
 \includegraphics{gamma01} & \includegraphics{gamma02} & \includegraphics{gamma03} \\
@@ -149,13 +138,16 @@ DE / VIS / MED / PROBE \& ACC  & DE / VIS / MED / PASS & DE / VIS / MED / PASS \
 \includegraphics{gamma07} & \includegraphics{gamma08} & \includegraphics{gamma09} \\
 JA / VIS / MED / PROBE & DE / AUD / MED / SEM  & DE / AUD / MED / SEM \\
 \includegraphics{gamma10} & \includegraphics{gamma11} & \includegraphics[height=15cm]{reprate} \\
-DE / AUD /HIGH / SEM & CY / VIS / MED / PROBE \& ACC &  Summary \\
+DE / AUD /HIGH / SEM & CY / VIS / MED / PROBE \& ACC &  Summary -- All conditions \\
 %German - visual & German auditory & English visual & English auditory \\ 
 \end{tabular}
 \end{block}
+\small
 HIGH, MED, LOW = high, medium, low close probability 
 
-SEM = semantic judgment; COMP = comprehension task; PROBE = probe task; \\ ACC = acceptability judgment task; PASS = passive listening 
+SEM = semantic judgment; COMP = comprehension task; 
+\\ PROBE = probe task; ACC = acceptability judgment task; 
+\\ PASS = passive listening 
 \end{textblock}
 
 % like 2012
@@ -169,6 +161,12 @@ SEM = semantic judgment; COMP = comprehension task; PROBE = probe task; \\ ACC =
 %\bibliography{poster.bib}
 %\end{block}
 %\end{textblock}
+
+\begin{textblock}{42}(73.5,76.5)
+\begin{block}{Conclusion}
+Gamma effects are not reliably elicited by the preposed experimental manipulation.
+\end{block}
+\end{textblock}
 
 \begin{textblock}{10}(113,69.5)
 %\includegraphics[width=2in]{contactinfo-qrcode.png}
