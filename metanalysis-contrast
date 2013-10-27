@@ -1,6 +1,6 @@
 
 % find subset of common electrodes across all data sets
-for X = 1:10
+for X = 1:11
 
 	sourcefile = ['/home/jona/gamma/',num2str((X),'%01i'),'c.mat'];
 	sourcefiles = ['/home/jona/gamma/',num2str(X),'s.mat'];
@@ -40,7 +40,7 @@ clear max_t_coord
 hs = [];
 winlength = [round(25/8),round(100/8),round(250/8)];				% /8 because of 125 hz sampling rate
 
-for X = 1:10
+for X = 1:11
 
 	clear allersp1; clear allersp2;clear allersp;
 
@@ -125,7 +125,7 @@ end;
 % calculate max val ttests again on each subject
 
 outcomes = [];
-for X = 1:10
+for X = 1:11
 
 	clear allersp1; clear allersp2;clear allersp;
 
@@ -159,7 +159,7 @@ for X = 1:10
 	allersp = allersp1-allersp2;
 	clear allersp1; clear allersp2;
 
-	for Y = 1:10												% this loop tests all the coordinates from max_t_coord
+	for Y = 1:11												% this loop tests all the coordinates from max_t_coord
 																% note that each file is also tested against its own max t vals!
 		a = max_t_coord{Y};
 		frequency = a{1}; t1 = a{2}; t2 = a{3}; elec = a{4};
