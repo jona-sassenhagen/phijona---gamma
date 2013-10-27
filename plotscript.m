@@ -180,8 +180,9 @@ for X = 1:num_exp
 	S = whos('-file',sourcefile);
 
 	for P = 1:4														% find the ERSP data (which have varying names)
-	content_sizes(P) = S(P).bytes;
+	    content_sizes(P) = S(P).bytes;
 	end;
+
 	[R,F] = max(content_sizes);
 	allersp = eval(S(F).name);
 	clear S(F).name;
@@ -199,8 +200,9 @@ for X = 1:num_exp
 	bar([0 mean(gammac(X,1:num_exp))*num_exp],'FaceColor',[0.9,0.5,0.5],'EdgeColor','r')
 	hold on;
 	bar([0 mean(gammacc(X,1:num_exp))*num_exp],'r')
+    hold on;
 
-
+    title('Replication Rate','FontWeight','bold');
 	set(gca,'XTick',[1 2])
 	set(gca,'XTickLabel',{'<12 hz','>30 hz'})
 	set(gca,'YTick',[5 num_exp])
