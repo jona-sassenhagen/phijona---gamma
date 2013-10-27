@@ -66,7 +66,8 @@ for X = 1:11
 	[nfreqs,ntimes,nchans,nsubjs]=size(allersp);
 
 	coord=[];t=[];
-	for frequencies = 50:90-8											% freqs(frequencies) will tell you what frequency it is
+	for frequencies = 1:20											% freqs(frequencies) will tell you what frequency it is
+%	for frequencies = 50:90-8											% freqs(frequencies) will tell you what frequency it is
 		for e = 1:length(all_available_chans)						% chanlocs(elec).label will tell you what electrode it is
 			elec = electrode(e);									% choose elec (1/(length(C)))
 			for winsize = 1:length(winlength)						% choose timewins (1/4)
@@ -78,7 +79,9 @@ for X = 1:11
 					
 						t1 = windowstart+61;						% hardcoded 61 as time point 0
 						t2 = t1+(winlength(winsize));					
-						value(subject)=mean(mean(allersp(frequencies:frequencies+8,t1:t2,elec,subject)));
+						value(subject)=mean(mean(allersp(frequencies:frequencies+3,t1:t2,elec,subject)));
+%						value(subject)=mean(mean(allersp(frequencies:frequencies+8,t1:t2,elec,subject)));
+
 						U = U+1;
 					end;
 					[h,p,ci,stats] = ttest(value);
@@ -162,6 +165,6 @@ end;
 
 U
 sum(sum(outcomes))
-
+outcomes
 
 % figure; tftopo(allersp,times,freqs,'mode','ave','limits', [nan nan nan nan nan nan], 'timefreqs', [times(166) 30], 'chanlocs', chanlocs,'smooth',2,'style','map','electrodes','off');
