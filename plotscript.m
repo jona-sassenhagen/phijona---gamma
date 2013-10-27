@@ -167,17 +167,11 @@ lfcc = ...
      1     1     1     0     1     1     1     1     1     0     0; ...
      1     0     1     0     0     0     0     0     0     1     0]
 
+for X = 1:num_exp
 
-
-X=1;
-h=figure;
-%for Y = 1:3:33
-%for Y = [1     6    12    19    21    26    31    36    41    46    51]
-%for Y =  [1     4     7    10    13    16    19    22    25    28    31]
-%for Y = [   1     5     9    13    17    21    25    29    33    37    41]
-%for Y = 1:4:44
-%for Y = [     1     5     9    13    18    21    25    29    32    37    41]
-for Y = [   1     9    16    24    30   38    45    53    59    67    74]
+    h=figure;
+    set(h,'Resize','off')
+    set(h,'Position',[200 200 1024 768]);
 
 	sourcefile = ['/home/jona/gamma/',num2str((X),'%01i'),'c.mat'];
 
@@ -192,10 +186,9 @@ for Y = [   1     9    16    24    30   38    45    53    59    67    74]
 	allersp = eval(S(F).name);
 	clear S(F).name;
 
-	sbplot(3,4,X);
 	tftopo(allersp,times,freqs,'mode','ave','limits', [nan nan nan nan -2.5 2.5], 'timefreqs', [times(all_max_coordinates_gamma(X,2)) freqs(all_max_coordinates_gamma(X,1));  times(all_max_coordinates_theta(X,2)) freqs(all_max_coordinates_theta(X,1)); times(all_max_coordinates_alpha(X,2)) freqs(all_max_coordinates_alpha(X,1));], 'chanlocs', chanlocs,'smooth',1.5,'style','map','electrodes','off','cbar','off');
 
-	sbplot(3,29,Y+5);
+	sbplot(1,4,4);
 	bar([num_exp num_exp],'FaceColor','w','EdgeColor','w')
 	hold on;
 
@@ -208,22 +201,16 @@ for Y = [   1     9    16    24    30   38    45    53    59    67    74]
 	bar([0 mean(gammacc(X,1:num_exp))*num_exp],'r')
 
 
-	%ylabel(gca,'Alignment')
 	set(gca,'XTick',[1 2])
 	set(gca,'XTickLabel',{'<12 hz','>30 hz'})
 	set(gca,'YTick',[5 num_exp])
 	set(gca,'YTickLabel',{'5',num2str(num_exp)})
 	ylabel('')
-	X = X+1;
-%	color = get(h,'Color');
-%	set(gca,'XColor',color,'YColor',color,'TickDir','out')
-	xlim([0.5 2.5])
+	xlim([0.5 2.5]);
 
+    filename = strcat(' Poster/Graphics/gamma',num2str(X,'%02d'))
+    eval(strcat('print -dpng ',filename));
+    close(h);
 end;
 
-set(h,'Resize','off')
-set(h,'Position',[200 200 3000 2000]);
-print -dpng gammaall.png;
-
-
-!!!legende!
+%!!!legende!
