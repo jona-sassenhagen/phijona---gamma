@@ -199,6 +199,7 @@ for Y = [   1     9    16    24    30   38    45    53    59    67    74]
 	bar([10 10],'FaceColor','w','EdgeColor','w')
 	hold on;
 
+
 	bar([mean(lfc(X,1:10))*10 0],'FaceColor',[0.5,0.5,0.9],'EdgeColor','b')
 	hold on;
 	bar([mean(lfcc(X,1:10))*10 0],'b')
