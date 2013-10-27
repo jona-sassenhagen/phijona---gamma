@@ -170,7 +170,7 @@ lfcc = ...
 
 
 X=1;
-h2=figure;
+h=figure;
 %for Y = 1:3:33
 %for Y = [1     6    12    19    21    26    31    36    41    46    51]
 %for Y =  [1     4     7    10    13    16    19    22    25    28    31]
@@ -211,7 +211,8 @@ for Y = [   1     9    16    24    30   38    45    53    59    67    74]
 	%ylabel(gca,'Alignment')
 	set(gca,'XTick',[1 2])
 	set(gca,'XTickLabel',{'<12 hz','>30 hz'})
-	set(gca,'YTick',[])
+	set(gca,'YTick',[5 10])
+	set(gca,'YTickLabel',{'5','10'})
 	ylabel('')
 	X = X+1;
 %	color = get(h,'Color');
@@ -221,7 +222,7 @@ for Y = [   1     9    16    24    30   38    45    53    59    67    74]
 end;
 
 set(h,'Resize','off')
-set(h,'Position',[200 200 4000 3000]);
+set(h,'Position',[200 200 3000 2000]);
 print -dpng gammaall.png;
 
 
