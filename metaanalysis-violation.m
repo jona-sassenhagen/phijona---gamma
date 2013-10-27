@@ -42,7 +42,7 @@ winlength = [round(25/8),round(100/8),round(250/8)];				% /8 because of 125 hz s
 
 for X = 1:11
 
-	sourcefile = ['/home/jona/gamma/',num2str((X),'%01i'),'c.mat'];
+	sourcefile = ['/home/jona/gamma/',num2str((X),'%01i'),'s.mat'];
 
 	load(sourcefile)
 
@@ -108,7 +108,7 @@ end;
 outcomes = [];
 for X = 1:11
 
-	sourcefile = ['/home/jona/gamma/',num2str((X),'%01i'),'c.mat'];
+	sourcefile = ['/home/jona/gamma/',num2str((X),'%01i'),'s.mat'];
 
 	load(sourcefile)
 
