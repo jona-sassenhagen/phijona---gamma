@@ -1,13 +1,13 @@
 key experimente gamma
 
-1 aktantica
-2 arche
-3 droege
-4 idoru
-5 moses
-6 rumba
-7 tako
-8 char
-9 scylla o
-10 scylla c
-11 cym
+1 aktantica -- German, auditory, high cloze, semantic judgement task
+2 arche     -- German, auditory, moderate cloze, comprehension task
+3 droege    -- German, visual, high cloze, memory probe and acceptability judgement tasks
+4 idoru     -- German, visual, moderate cloze, memory probe and acceptability judgement tasks
+5 moses     -- German, visual, moderate cloze, passive listening
+6 rumba     -- German, visual, moderate cloze, passive listening
+7 tako      -- Japanese, visual, moderate cloze, memory probe task
+8 char      -- German, auditory, moderate cloze, semantic judgement task
+9 scylla o  -- German, auditory, moderate cloze, semantic judgement task
+10 scylla c -- German, auditory, high cloze, semantic judgement task
+11 cym      -- Welsh, visual, moderate cloze, memory probe and acceptability judgement tasks

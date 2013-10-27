@@ -45,7 +45,6 @@ for X = 1:11
 	clear allersp1; clear allersp2;clear allersp;
 
 	sourcefile = ['/home/jona/gamma/',num2str((X),'%01i'),'c.mat'];
-	sourcefiles = ['/home/jona/gamma/',num2str(X),'s.mat'];
 
 	load(sourcefile)
 
@@ -87,7 +86,9 @@ for X = 1:11
 
 	coord=[];t=[];
 
-	for frequencies = 50:90-8											% freqs(frequencies) will tell you what frequency it is
+%	for frequencies = 50:90-8											% freqs(frequencies) will tell you what frequency it is
+	for frequencies = 1:20											% freqs(frequencies) will tell you what frequency it is
+
 		for e = 1:length(all_available_chans)						% chanlocs(elec).label will tell you what electrode it is
 			elec = electrode(e);									% choose elec (1/(length(C)))
 			for winsize = 1:length(winlength)						% choose timewins (1/4)

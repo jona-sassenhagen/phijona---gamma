@@ -6,7 +6,7 @@ penolazzi	1	0.007	(These are the main effects, for different frequency bands.)
 penolazzi	2	0.029
 penolazzi	3	0.05
 hald		1	0.034
-rommers		1	< 0.005
+rommers		1	<0.005
 rommers		2	0.032
 rommers		3	0.052
 rommers		4	0.045
