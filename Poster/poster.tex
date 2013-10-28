@@ -3,7 +3,6 @@
 \usepackage[orientation=landscape,size=a0,scale=1.4]{beamerposter}
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows,decorations.markings}
-%\usepackage[orientation=landscape,height=1067mm,width=1524mm,scale=1.4,debug]{beamerposter}
 
 \usepackage[absolute,overlay]{textpos}
 \usepackage[numbers,compress]{natbib}
@@ -13,15 +12,6 @@
 %\usepackage{wrapfig}
 \usepackage{rotating}
 \graphicspath{{Graphics/}}
-
-% single line bib
-% http://tex.stackexchange.com/a/5574
-%\usepackage{paralist}
-%\renewenvironment{thebibliography}[1]{%
-%  \section*{\refname}%
-%  \let\par\relax\let\newblock\relax%
-%  \inparaenum[{[}1{]}]}{\endinparaenum}
-%\renewcommand{\bibitem}[1]{\item}
 
 \newcolumntype{C}[1]{>{\centering\arraybackslash} m{#1} }
 \setlength{\TPHorizModule}{1cm}
@@ -46,20 +36,18 @@
 
 \begin{textblock}{45}(1,04.5)
 \begin{block}{Motivation: Reproducibility of Results}
-Recently, research on event-related spectral perturbations (ERSPs) has begun to focus on the gamma band of the human EEG. A number of recent studies have reported gamma effects for semantic integration (related to cloze probability in classical N400 paradigms) \cite{mellemfriedmanmedvedev2013a,wangzhubastiaansen2012a,penolazziangrillijob2009a,hagoort2008a,hagoorthaldbastiaansen2004a}, but the effects thus far have been far less consistent than previous findings in the lower frequency bands (cf.~\cite{bastiaansenhagoort2006a,heinetammhofmann2006a,rohmklimeschhaider2001a,davidsonindefrey2007a,roehmschlesewskybornkessel2004a}).
-In line with recent concerns about the reliability of effects in the brain sciences \cite{vulharriswinkielman2009a,simmonsnelsonsimonsohn2011a,kilner2013a}, we performed a pseudo-jackknife replication meta-analysis of existing experimental data. 
-% killner 2013
-%\subblock{Title}
+Recently, research on event-related spectral perturbations (ERSPs) has begun to focus on the gamma band of the human EEG. Recent studies have reported gamma effects for semantic integration (related to cloze probability in classical N400 paradigms) \cite{mellemfriedmanmedvedev2013a,wangzhubastiaansen2012a,penolazziangrillijob2009a,hagoort2008a,hagoorthaldbastiaansen2004a}, but the effects thus far have been far less consistent than previous findings in the lower frequency bands (cf.~\cite{bastiaansenhagoort2006a,heinetammhofmann2006a,rohmklimeschhaider2001a,davidsonindefrey2007a,roehmschlesewskybornkessel2004a}).
+In line with recent concerns about the reliability of effects in the brain sciences \cite{vulharriswinkielman2009a,simmonsnelsonsimonsohn2011a,kilner2013a}, we performed meta-analysis of existing data. As the inconsistent previous findings do not allow for a single hypothesis, we used a pseudo-jackknife method.
 \end{block}
 
 \begin{block}{Literature \hfill $p$-Values in Prior Research}
 \begin{columns}
 \column{0.05\textwidth}
-\column{0.4\textwidth}
+\column{0.55\textwidth}
 \tiny
 \bibliographystyle{poster}
 \bibliography{poster.bib}
-\column{0.2\textwidth}
+\column{0.1\textwidth}
 \column{0.7\textwidth}
 \includegraphics[height=12.5cm]{kspcurve.png}
 \end{columns}
@@ -148,7 +136,7 @@ DE / AUD /HIGH / SEM & CY / VIS / MED / PROBE \& ACC &  Summary -- All condition
 
 %\begin{textblock}{69}(48.5,76.5)
 \begin{block}{Conclusion}
-Unlike \textcolor{blue}{low-frequency effects}, \textcolor{red}{gamma effects} are not reliably elicited by the proposed experimental manipulation.
+Unlike \textcolor[RGB]{11,36,251}{low-frequency effects}, \textcolor{red}{gamma effects} are not reliably elicited by the proposed experimental manipulation.
 \end{block}
 \end{textblock}
 
